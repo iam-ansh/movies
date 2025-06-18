@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+//user model for signin signup
+model User {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  username      String   @unique
+  displayName   String 
+  password      String
+}
+
+//get all movies
+// model genre {
+//   id    Int @id 
+//   name  String
+//   movie Movies @relation(fields: [movieId], references: [id])
+//   movieId Int
+// }
+model Movies {
+  id                  Int      @id 
+  adult               Boolean
+  genres              Json
+  original_language   String
+  title               String
+  overview            String
+  status              String
+  vote_average        Float
+  
+}
